@@ -7,10 +7,8 @@
   var header = document.querySelector('#header');
   var container = document.getElementById('container');
   var gameInfo = document.querySelector('#gameInfo');
-  gameInfo.innerHTML = "Nobody has won a round.";
   var score = document.getElementById('score');
   var console = document.getElementById('console');
-  console.innerHTML = "Choose rock, paper, or scissors!";
   var userTally = document.querySelector('#user');
   var compTally = document.querySelector('#comp');
   var button = document.querySelector('button');
@@ -19,9 +17,7 @@
   var userWins;
   var tie;
   var userScore = 0;
-  userTally.innerHTML = userScore;
   var compScore = 0;
-  compTally.innerHTML = compScore;
   var pending = false;
 
 

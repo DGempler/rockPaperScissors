@@ -16,8 +16,6 @@
   var computerChoice;
   var userWins;
   var tie;
-  var userScore = 0;
-  var compScore = 0;
   var pending = false;
 
 
@@ -36,7 +34,6 @@
     logCompResult();
     setTimeout(function() {
       showResult();
-      updateScore();
       pending = false;
     }, 4000);
   });
@@ -52,31 +49,25 @@
     else if (userChoice === "scissors") {
       if (computerChoice === "rock") {
         userWins = false;
-        compScore++;
       }
       else {
         userWins = true;
-        userScore++;
       }
     }
     else if (userChoice === "rock") {
       if (computerChoice === "paper") {
         userWins = false;
-        compScore++;
       }
       else {
         userWins = true;
-        userScore++;
       }
     }
     else if (userChoice === "paper") {
       if (computerChoice === "scissors") {
         userWins = false;
-        compScore++;
       }
       else {
         userWins = true;
-        userScore++;
       }
     }
   }
@@ -101,10 +92,12 @@
     }
     else if (userWins) {
       gameInfo.innerHTML = "You win this round!";
+      userTally.innerHTML++;
       userWins = false;
     }
     else {
       gameInfo.innerHTML = "The computer wins this round!";
+      compTally.innerHTML++;
     }
   }
 
@@ -130,17 +123,13 @@
     }, 1000);
   }
 
-  function updateScore() {
-    userTally.innerHTML = userScore;
-    compTally.innerHTML = compScore;
-  }
+
 
   function reset() {
     console.innerHTML = "Choose rock, paper, or scissors!";
     gameInfo.innerHTML = "Nodoby has won a round.";
-    userScore = 0;
-    compScore = 0;
-    updateScore();
+    userTally.innerHTML = 0;
+    compTally.innerHTML = 0;
   }
 
   button.addEventListener("click", function() {

@@ -41,47 +41,43 @@
 
 
   function getOutcome(userChoice) {
-    computerChoice = randomChoice();
+    var randomNum = Math.random();
 
-    if (userChoice === computerChoice) {
-      tie = true;
-    }
-    else if (userChoice === "scissors") {
-      if (computerChoice === "rock") {
-        userWins = false;
-      }
-      else {
-        userWins = true;
-      }
-    }
-    else if (userChoice === "rock") {
-      if (computerChoice === "paper") {
-        userWins = false;
-      }
-      else {
-        userWins = true;
-      }
-    }
-    else if (userChoice === "paper") {
-      if (computerChoice === "scissors") {
-        userWins = false;
-      }
-      else {
-        userWins = true;
-      }
-    }
-  }
-
-  function randomChoice() {
-    randomNum = Math.random();
     if (randomNum >= 0.66) {
-      return "rock";
+      computerChoice = "rock";
+      if (userChoice === "scissors") {
+        userWins = false;
+      }
+      else if (userChoice === "paper") {
+        userWins = true;
+      }
+      else {
+        tie = true;
+      }
     }
     else if (randomNum >= 0.33) {
-      return "paper";
+      computerChoice = "paper";
+      if (userChoice === "rock") {
+        userWins = false;
+      }
+      else if (userChoice === "scissors") {
+        userWins = true;
+      }
+      else {
+        tie = true;
+      }
     }
     else {
-      return "scissors";
+      computerChoice = "scissors";
+      if (userChoice === "paper") {
+        userWins = false;
+      }
+      else if (userChoice === "rock") {
+        userWins = true;
+      }
+      else {
+        tie = true;
+      }
     }
   }
 
@@ -127,7 +123,7 @@
 
   function reset() {
     console.innerHTML = "Choose rock, paper, or scissors!";
-    gameInfo.innerHTML = "Nodoby has won a round.";
+    gameInfo.innerHTML = "Nodoby has won a round yet.";
     userTally.innerHTML = 0;
     compTally.innerHTML = 0;
   }

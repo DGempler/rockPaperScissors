@@ -2,34 +2,25 @@
 // The "computer" should pick a random move each turn.
 // Keep a score counter somewhere on the page. Don't worry about styling until you're done with the logic.
 
-(function() {
-
-  var header = document.querySelector('#header');
-  var container = document.getElementById('container');
-  var gameInfo = document.querySelector('#gameInfo');
-  var score = document.getElementById('score');
-  var console = document.getElementById('console');
-  var userTally = document.querySelector('#user');
-  var compTally = document.querySelector('#comp');
-  var button = document.querySelector('button');
+$(document).ready(function() {
   var userChoice;
   var computerChoice;
   var userWins;
   var tie;
   var pending = false;
 
-  container.addEventListener("click", function(event) {
+  $('#container').on("click", function(event) {
     if (pending) {
       return;
     }
-    if (event.target.id === "container") {
+    if (event.target.id === "container" || event.target.id === "") {
       return;
     }
     pending = true;
-    gameInfo.innerHTML = '';
+    $('#gameInfo').text('');
     userChoice = event.target.id;
     getOutcome(userChoice);
-    console.innerHTML = "You chose " + userChoice + ". ";
+    $('#console').text("You chose " + userChoice + ". ");
     logCompResult();
     setTimeout(function() {
       showResult();
@@ -80,44 +71,49 @@
 
   function showResult() {
     if (tie === true) {
-      gameInfo.innerHTML = "The result is a tie!";
+      $('#gameInfo').text("The result is a tie!");
       tie = false;
     }
     else if (userWins) {
-      gameInfo.innerHTML = "You win this round!";
-      userTally.innerHTML++;
+      $('#gameInfo').text("You win this round!");
+      var text1 = $('#user').text();
+      $('#user').text(parseInt(text1) + 1);
       userWins = false;
     }
     else {
-      gameInfo.innerHTML = "The computer wins this round!";
-      compTally.innerHTML++;
+      $('#gameInfo').text("The computer wins this round!");
+      var text2 = $('#comp').text();
+      $('#comp').text(parseInt(text2) + 1);
     }
   }
 
   function logCompResult() {
     setTimeout(function () {
-      console.innerHTML += "The computer chose";
+      var text3 = $('#console').text();
+      $('#console').text(text3 + "The computer chose");
       var timer = setInterval(addDot, 500);
       setTimeout(function () {
          clearInterval(timer);
-        console.innerHTML += " " + computerChoice + "!";
+         var text4 = $('#console').text();
+        $('#console').text(text4 + " " + computerChoice + "!");
       }, 2000);
     }, 1000);
   }
 
   function addDot() {
-    console.innerHTML += ".";
+    var text5 = $('#console').text();
+    $('#console').text(text5 + ".");
   }
 
   function reset() {
-    console.innerHTML = "Choose rock, paper, or scissors!";
-    gameInfo.innerHTML = "Nodoby has won a round yet.";
-    userTally.innerHTML = 0;
-    compTally.innerHTML = 0;
+    $('#console').text("Choose rock, paper, or scissors!");
+    $('#gameInfo').text("Nodoby has won a round yet.");
+    $('#user').text('0');
+    $('#comp').text('0');
   }
 
-  button.addEventListener("click", function() {
-    reset();
-  });
+  $('button').on("click", function() {
+      reset();
+    });
 
-})();
+});

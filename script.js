@@ -30,7 +30,7 @@
     gameInfo.innerHTML = '';
     userChoice = event.target.id;
     getOutcome(userChoice);
-    logUserResult();
+    console.innerHTML = "You chose " + userChoice + ". ";
     logCompResult();
     setTimeout(function() {
       showResult();
@@ -95,10 +95,6 @@
       gameInfo.innerHTML = "The computer wins this round!";
       compTally.innerHTML++;
     }
-  }
-
-  function logUserResult() {
-    console.innerHTML = "You chose " + userChoice + ". ";
   }
 
   function logCompResult() {

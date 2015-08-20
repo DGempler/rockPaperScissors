@@ -3,6 +3,12 @@
 // Keep a score counter somewhere on the page. Don't worry about styling until you're done with the logic.
 
 $(document).ready(function() {
+  var $container = $('#container');
+  var $gameInfo = $('#gameInfo');
+  var $myConsole = $('#console');
+  var $userTally = $('#user');
+  var $compTally = $('#comp');
+  var $button = $('button');
   var userChoice;
   var computerChoice;
   var userWins;
@@ -17,10 +23,10 @@ $(document).ready(function() {
       return;
     }
     pending = true;
-    $('#gameInfo').text('');
+    $gameInfo.text('');
     userChoice = event.target.id;
     getOutcome(userChoice);
-    $('#console').text("You chose " + userChoice + ". ");
+    $myConsole.text("You chose " + userChoice + ". ");
     logCompResult();
     setTimeout(function() {
       showResult();
@@ -71,45 +77,45 @@ $(document).ready(function() {
 
   function showResult() {
     if (tie === true) {
-      $('#gameInfo').text("The result is a tie!");
+      $gameInfo.text("The result is a tie!");
       tie = false;
     }
     else if (userWins) {
       $('#gameInfo').text("You win this round!");
-      var text1 = $('#user').text();
-      $('#user').text(parseInt(text1) + 1);
+      var text1 = $userTally.text();
+      $userTally.text(parseInt(text1) + 1);
       userWins = false;
     }
     else {
-      $('#gameInfo').text("The computer wins this round!");
-      var text2 = $('#comp').text();
-      $('#comp').text(parseInt(text2) + 1);
+      $gameInfo.text("The computer wins this round!");
+      var text2 = $compTally.text();
+      $compTally.text(parseInt(text2) + 1);
     }
   }
 
   function logCompResult() {
     setTimeout(function () {
-      var text3 = $('#console').text();
-      $('#console').text(text3 + "The computer chose");
+      var text3 = $myConsole.text();
+      $myConsole.text(text3 + "The computer chose");
       var timer = setInterval(addDot, 500);
       setTimeout(function () {
          clearInterval(timer);
-         var text4 = $('#console').text();
-        $('#console').text(text4 + " " + computerChoice + "!");
+         var text4 = $myConsole.text();
+        $myConsole.text(text4 + " " + computerChoice + "!");
       }, 2000);
     }, 1000);
   }
 
   function addDot() {
-    var text5 = $('#console').text();
-    $('#console').text(text5 + ".");
+    var text5 = $myConsole.text();
+    $myConsole.text(text5 + ".");
   }
 
   function reset() {
-    $('#console').text("Choose rock, paper, or scissors!");
-    $('#gameInfo').text("Nodoby has won a round yet.");
-    $('#user').text('0');
-    $('#comp').text('0');
+    $myConsole.text("Choose rock, paper, or scissors!");
+    $gameInfo.text("Nodoby has won a round yet.");
+    $userTally.text('0');
+    $compTally.text('0');
   }
 
   $('button').on("click", function() {

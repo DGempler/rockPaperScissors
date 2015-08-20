@@ -18,7 +18,6 @@
   var tie;
   var pending = false;
 
-
   container.addEventListener("click", function(event) {
     if (pending) {
       return;
@@ -37,8 +36,6 @@
       pending = false;
     }, 4000);
   });
-
-
 
   function getOutcome(userChoice) {
     var randomNum = Math.random();
@@ -100,22 +97,17 @@
   function logCompResult() {
     setTimeout(function () {
       console.innerHTML += "The computer chose";
+      var timer = setInterval(addDot, 500);
       setTimeout(function () {
-        console.innerHTML += ".";
-        setTimeout(function () {
-          console.innerHTML += ".";
-          setTimeout(function () {
-            console.innerHTML += ".";
-            setTimeout(function () {
-              console.innerHTML += " " + computerChoice + "!";
-            }, 500);
-          }, 500);
-        }, 500);
-      }, 500);
+         clearInterval(timer);
+        console.innerHTML += " " + computerChoice + "!";
+      }, 2000);
     }, 1000);
   }
 
-
+  function addDot() {
+    console.innerHTML += ".";
+  }
 
   function reset() {
     console.innerHTML = "Choose rock, paper, or scissors!";
